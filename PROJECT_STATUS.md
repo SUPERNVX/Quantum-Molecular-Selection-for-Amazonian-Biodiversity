@@ -123,16 +123,19 @@ git remote add origin https://github.com/seu-usuario/quantum-biodiversity.git
 git push -u origin main
 ```
 
-## 📊 Status Atual
+## Status das Fases
 
-| Tarefa | Status |
-|--------|--------|
-| Setup Ambiente | ✅ Completo |
-| Coleta de Dados | ⏳ Pronto para executar |
-| Pré-processamento | ⏳ Pronto para executar |
-| Algoritmos Clássicos | ⏳ Pronto para executar |
-| QAOA Simulador | ⏳ Pronto para executar |
-| QAOA Hardware Real | ⏳ Aguardando dados |
+| Fase | Descrição | Status |
+| :--- | :--- | :--- |
+| 1 | Setup do Ambiente (Windows) | ✅ Concluído |
+| 2 | Coleta e Processamento de Dados | ✅ Concluído |
+| 3 | Algoritmos Clássicos e Quânticos | ✅ Concluído |
+| 4 | Documentação e Finalização | ✅ Concluído |
+
+## Próximos Passos (Sugestões para o Usuário)
+1. Conectar ao IBM Quantum para testes em hardware real (conforme configurado em `quantum_molecular_selection.py`).
+2. Expandir a lista de espécies amazônicas em `src/utils/data_collection.py`.
+3. Experimentar com `p > 1` no algoritmo QAOA para melhor precisão.
 
 ---
 

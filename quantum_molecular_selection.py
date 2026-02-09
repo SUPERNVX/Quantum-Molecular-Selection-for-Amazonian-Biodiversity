@@ -14,8 +14,8 @@ import time
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.circuit import Parameter
 from qiskit_aer import AerSimulator
-from qiskit_ibm_runtime import QiskitRuntimeService, Session, Sampler
-from qiskit.primitives import BackendSampler
+from qiskit_aer.primitives import Sampler as AerSampler
+from qiskit_ibm_runtime import QiskitRuntimeService, Session, Sampler as IBMSampler
 
 # Optimization
 from scipy.optimize import minimize
@@ -279,10 +279,17 @@ class QuantumMolecularSelector:
         expectation = 0.0
         total_shots = sum(counts.values())
         
-        for bitstring, count in counts.items():
+        for bit_key, count in counts.items():
+            # Handle both bitstring (str) and integer (int) keys from different Samplers
+            if isinstance(bit_key, str):
+                bitstring = bit_key
+            else:
+                bitstring = format(bit_key, f'0{n}b')
+                
             # Convert bitstring to spin vector (-1, +1)
+            # Reverse bitstring because qubit 0 is usually the rightmost bit in binary representation
             z = np.array([1 if bit == '0' else -1 
-                         for bit in bitstring[::-1]])  # Reverse for qubit ordering
+                         for bit in bitstring[::-1]])
             
             # Compute energy: z^T J z + h^T z
             energy = np.dot(z, np.dot(J, z)) + np.dot(h, z) + offset
@@ -367,13 +374,13 @@ class QuantumMolecularSelector:
             if self.use_real_quantum:
                 # Use IBM Quantum hardware
                 with Session(service=self.service, backend=self.backend) as session:
-                    sampler = Sampler(session=session)
+                    sampler = IBMSampler(session=session)
                     job = sampler.run(bound_circuit, shots=shots)
                     result = job.result()
                     counts = result.quasi_dists[0].binary_probabilities()
             else:
                 # Use local simulator
-                sampler = BackendSampler(self.backend)
+                sampler = AerSampler()
                 job = sampler.run(bound_circuit, shots=shots)
                 result = job.result()
                 counts = result.quasi_dists[0]
@@ -408,7 +415,13 @@ class QuantumMolecularSelector:
         # Find most common bitstring (that satisfies constraint)
         valid_solutions = []
         
-        for bitstring, count in best_counts.items():
+        for bit_key, count in best_counts.items():
+            # Handle both bitstring (str) and integer (int) keys
+            if isinstance(bit_key, str):
+                bitstring = bit_key
+            else:
+                bitstring = format(bit_key, f'0{len(J)}b')
+                
             # Count selected molecules
             selected = [i for i, bit in enumerate(bitstring[::-1]) if bit == '0']
             
@@ -473,20 +486,21 @@ def main():
     df = pd.read_csv('data/processed/amazonian_molecules.csv')
     print(f"Loaded {len(df)} molecules")
     
-    # FIRST: Test with simulator
+    # FIRST: Test with simulator (Limit to 15 qubits for local simulation)
     print("\n" + "="*60)
-    print("TESTING WITH SIMULATOR (FREE, UNLIMITED)")
+    print("TESTING WITH SIMULATOR (Sub-amostragem para 15 qubits)")
     print("="*60)
     
-    selector_sim = QuantumMolecularSelector(df, use_real_quantum=False)
+    df_subset = df.head(15)
+    selector_sim = QuantumMolecularSelector(df_subset, use_real_quantum=False)
     qaoa_selection_sim, qaoa_diversity_sim, qaoa_time_sim = selector_sim.qaoa_optimize(
-        k=20, 
-        p=1,  # Start with p=1
+        k=5, # Reduzido proporcionalmente
+        p=1, 
         shots=1024
     )
     
     # THEN: If simulator works, use real quantum
-    use_real = input("\nRun on real IBM Quantum hardware? (y/n): ").lower() == 'y'
+    use_real = os.getenv('RUN_REAL_QUANTUM', 'n').lower() == 'y'
     
     if use_real:
         token = os.getenv('IBM_QUANTUM_TOKEN')

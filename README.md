@@ -182,8 +182,7 @@ python src/analysis/compare_algorithms.py
 
 - **LACQ Feynman**: Gabriel Albuquerque and team for mentorship and quantum computing resources
 - **IBM Quantum**: Quantum computing access through IBM Quantum Experience
-- **Colégio de Santa Inês**: Prof. Luciana Gomes Roa Chung for academic support
-- **NuBBE Database**: Prof. Vanderlan Bolzani for Brazilian natural products data
+- **NuBBE Database**: Prof. Vanderlan Bolzani for Brazilian natural product data
 
 ---
 
@@ -200,9 +199,8 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 ## 📧 Contact
 
 **Nicolas Mendes de Araújo**
-- Email: [your_email]
+- Email: nicolasmda09@gmail.com
 - GitHub: [@supernvx](https://github.com/supernvx)
-- LinkedIn: [your_linkedin]
 
 **Project Updates**: Follow development at [GitHub Project Board](link)
 

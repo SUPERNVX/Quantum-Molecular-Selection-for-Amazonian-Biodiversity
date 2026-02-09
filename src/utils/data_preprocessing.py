@@ -155,21 +155,22 @@ def analyze_diversity(df: pd.DataFrame, similarity_matrix: np.ndarray):
     
     n = len(df)
     
-    # Calcular diversidade média por espécie
-    print("\nDiversidade por espécie:")
-    for species in df['species'].unique()[:5]:  # Top 5
-        species_indices = df[df['species'] == species].index.tolist()
+    # Calcular diversidade média por fonte/espécie
+    print("\nDiversidade por fonte/espécie:")
+    source_col = 'source' if 'source' in df.columns else 'species'
+    for source in df[source_col].unique()[:5]:  # Top 5
+        source_indices = df[df[source_col] == source].index.tolist()
         
-        if len(species_indices) > 1:
-            species_similarities = []
-            for i in species_indices:
-                for j in species_indices:
+        if len(source_indices) > 1:
+            source_similarities = []
+            for i in source_indices:
+                for j in source_indices:
                     if i < j:
-                        species_similarities.append(similarity_matrix[i][j])
+                        source_similarities.append(similarity_matrix[i][j])
             
-            avg_similarity = np.mean(species_similarities)
+            avg_similarity = np.mean(source_similarities)
             diversity = 1 - avg_similarity
-            print(f"  {species[:30]:30} → Diversidade: {diversity:.4f}")
+            print(f"  {source[:30]:30} → Diversidade: {diversity:.4f}")
     
     # Moléculas mais "centrais" (alta similaridade média)
     print("\nMoléculas mais representativas (centrais):")
@@ -177,18 +178,18 @@ def analyze_diversity(df: pd.DataFrame, similarity_matrix: np.ndarray):
     central_indices = np.argsort(avg_similarities)[::-1][:3]
     
     for idx in central_indices:
-        species = df.loc[idx, 'species']
+        source = df.loc[idx, source_col]
         avg_sim = avg_similarities[idx]
-        print(f"  ID {idx}: {species[:30]:30} (Sim média: {avg_sim:.4f})")
+        print(f"  ID {idx}: {source[:30]:30} (Sim média: {avg_sim:.4f})")
     
     # Moléculas mais "únicas" (baixa similaridade média)
     print("\nMoléculas mais únicas (periféricas):")
     unique_indices = np.argsort(avg_similarities)[:3]
     
     for idx in unique_indices:
-        species = df.loc[idx, 'species']
+        source = df.loc[idx, source_col]
         avg_sim = avg_similarities[idx]
-        print(f"  ID {idx}: {species[:30]:30} (Sim média: {avg_sim:.4f})")
+        print(f"  ID {idx}: {source[:30]:30} (Sim média: {avg_sim:.4f})")
 
 
 def save_processed_data(df: pd.DataFrame, 
@@ -226,9 +227,10 @@ def save_processed_data(df: pd.DataFrame,
     print(f"✓ Matriz de similaridade: {sim_path}")
     
     # Criar metadados
+    source_col = 'source' if 'source' in df.columns else 'species'
     metadata = {
         'n_molecules': len(df),
-        'n_species': df['species'].nunique(),
+        'n_sources': df[source_col].nunique(),
         'fingerprint_type': 'Morgan (ECFP4)',
         'fingerprint_radius': 2,
         'fingerprint_bits': 2048,

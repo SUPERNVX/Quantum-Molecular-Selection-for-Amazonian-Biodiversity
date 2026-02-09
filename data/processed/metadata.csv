@@ -1,0 +1,2 @@
+n_molecules,n_sources,fingerprint_type,fingerprint_radius,fingerprint_bits,similarity_metric,avg_molecular_weight,avg_logp
+35,7,Morgan (ECFP4),2,2048,Tanimoto,411.31825195942866,3.518504000000002
