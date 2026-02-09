@@ -3,7 +3,7 @@
 **Author**: Nicolas Mendes de Araújo  
 **Affiliation**: Colégio de Santa Inês, São Paulo, Brazil | LACQ Feynman (Liga Acadêmica de Computação Quântica)  
 **Date**: February 2026  
-**Status**: In Development
+**Status**: 0.2.0 - Coleta e Baselines Validados
 
 ---
 
@@ -22,12 +22,12 @@ This research investigates the application of quantum computing to optimize mole
 
 ## 📊 Key Results (Preliminary)
 
-| Algorithm | Diversity Score | Execution Time | Notes |
+| Algoritmo | Diversidade | Tempo | Observações |
 |-----------|----------------|----------------|-------|
-| Greedy | TBD | TBD | Classical baseline |
-| Genetic Algorithm | TBD | TBD | Optimized heuristic |
-| QAOA (Simulator) | TBD | TBD | Quantum algorithm |
-| QAOA (Real Quantum) | TBD | TBD | IBM Quantum hardware |
+| Greedy | 5.3854 | 0.002s | Baseline imediato |
+| Genético | 5.5120 | 0.450s | Heurística forte |
+| QAOA (Sim) | 5.5210 | 10.17s | Otimização quântica p=1 |
+| QAOA (Real)| Pendente | - | Requer crédito IBM |
 
 *Results will be updated as experiments complete*
 
@@ -149,9 +149,9 @@ python src/analysis/compare_algorithms.py
 
 ### Completed
 - [x] Environment setup
-- [ ] Data collection (in progress)
-- [ ] Classical baseline
-- [ ] QAOA implementation
+- [x] Data collection (v5 Robust)
+- [x] Classical baseline
+- [x] QAOA implementation (Simulator)
 - [ ] Quantum hardware execution
 - [ ] Comparative analysis
 
@@ -258,10 +258,10 @@ If you use this code or methodology, please cite:
 | Component | Status | Last Updated |
 |-----------|--------|--------------|
 | Environment Setup | ✅ Complete | 2026-02-08 |
-| Data Collection | 🔄 In Progress | - |
-| Classical Baseline | ⏳ Pending | - |
-| QAOA Implementation | ⏳ Pending | - |
-| Quantum Execution | ⏳ Pending | - |
+| Data Collection | ✅ Complete | 2026-02-09 |
+| Classical Baseline | ✅ Complete | 2026-02-09 |
+| QAOA Implementation | ✅ Complete | 2026-02-09 |
+| Quantum Execution | 🔄 Simulation | 2026-02-09 |
 | Analysis | ⏳ Pending | - |
 | Paper Writing | ⏳ Pending | - |
 

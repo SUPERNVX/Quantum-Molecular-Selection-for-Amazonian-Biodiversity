@@ -15,6 +15,30 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [0.2.0] - 2026-02-09
+
+### Adicionado
+- **Sistema de Coleta Robusta (v5):**
+  - Integração com NCBI Entrez E-Utilities (`pcsubstance`) para busca taxonômica precisa.
+  - Conversão automatizada de SID para CID via PUG REST.
+  - Suporte a múltiplas chaves de estrutura (`SMILES`, `CanonicalSMILES`, `IsomericSMILES`).
+  - Rate limiting conservador para estabilidade da API.
+- **Resultados de Algoritmos:**
+  - Execução bem-sucedida de Greedy e Algoritmo Genético.
+  - Execução de QAOA Quântico com 15 qubits (simulação local).
+  - Geração de artefatos de saída em `data/results/`.
+
+### Corrigido
+- **Migração Qiskit 1.0:**
+  - Substituição do `BackendSampler` (obsoleto) pelo `AerSampler` e `IBMSampler`.
+  - Tratamento de outcomes de medição como inteiros (novo padrão do Qiskit 1.0).
+- **Esquema de Dados:**
+  - Harmonização da coluna `species`/`source` entre coleta e pré-processamento.
+- **Logística de Dados:**
+  - Correção de bug no achatamento (flattening) de listas de CIDs.
+
+---
+
 ## [0.1.0] - 2026-02-09
 
 ### Adicionado
