@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+quantum_env/
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+
+# Data files (não versionar datasets grandes)
+data/raw/*.csv
+data/raw/*.sdf
+data/processed/*.npy
+data/processed/*.pkl
+data/results/*.csv
+data/results/*.json
+
+# Mantenha estrutura de diretórios
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/results/.gitkeep
+
+# Figures
+figures/*.png
+figures/*.jpg
+figures/*.pdf
+!figures/.gitkeep
+
+# Papers
+papers/*.pdf
+papers/*.aux
+papers/*.log
+papers/*.out
+papers/*.synctex.gz
+!papers/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python distribution
+dist/
+build/
+*.egg-info/

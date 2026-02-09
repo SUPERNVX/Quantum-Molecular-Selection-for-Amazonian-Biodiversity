@@ -1,0 +1,30 @@
+# Quantum Computing
+qiskit
+qiskit-aer
+qiskit-ibm-runtime
+
+# Chemistry
+rdkit
+
+# Data Science
+numpy
+pandas
+scipy
+scikit-learn
+
+# Visualization  
+matplotlib
+seaborn
+plotly
+
+# Graph/Network
+networkx
+
+# Utilities
+tqdm
+python-dotenv
+requests
+
+# Jupyter (optional)
+jupyter
+ipywidgets
