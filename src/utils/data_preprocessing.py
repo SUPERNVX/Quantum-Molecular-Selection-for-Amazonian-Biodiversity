@@ -247,9 +247,14 @@ def save_processed_data(df: pd.DataFrame,
 
 def main():
     """Pipeline completo de pré-processamento"""
+    # Carregar o novo dataset expandido
+    df_path = 'data/raw/amazonian_molecules_final_1000.csv'
+    if not os.path.exists(df_path):
+        print(f"Erro: Arquivo {df_path} não encontrado.")
+        return
     
-    # 1. Carregar e limpar
-    df = load_and_clean_data()
+    df = pd.read_csv(df_path)
+    print(f"Dataset carregado: {len(df)} moléculas")
     
     # 2. Calcular fingerprints
     fingerprints = compute_fingerprints(df)

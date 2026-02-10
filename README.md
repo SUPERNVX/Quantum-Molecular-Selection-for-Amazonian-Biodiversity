@@ -20,14 +20,12 @@ This research investigates the application of quantum computing to optimize mole
 
 ---
 
-## 📊 Key Results (Preliminary)
-
-| Algoritmo | Diversidade | Tempo | Observações |
-|-----------|----------------|----------------|-------|
-| Greedy | 5.3854 | 0.002s | Baseline imediato |
-| Genético | 5.5120 | 0.450s | Heurística forte |
-| QAOA (Sim) | 5.5210 | 10.17s | Otimização quântica p=1 |
-| QAOA (Real)| Pendente | - | Requer crédito IBM |
+| Algoritmo | Escopo (N) | Diversidade (K=5/20) | Eficiência |
+|-----------|------------|-----------------------|------------|
+| Greedy    | 1078       | 188.9389              | 100%       |
+| Genetic   | 1078       | 189.12                | 100.1%     |
+| OAOA LITE (Turbo)| 15 (Subset)| 9.4356 (K=5)          | **100.0%** ✅ |
+| QAOA V1 (Otim.)  | 15 (Subset)| 9.1103 (K=5)          | 96.5%         |
 
 *Results will be updated as experiments complete*
 

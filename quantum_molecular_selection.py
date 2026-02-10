@@ -119,23 +119,13 @@ class QuantumMolecularSelector:
         
         return selected
     
-    def formulate_qubo(self, k: int) -> Tuple[np.ndarray, float]:
+    def formulate_qubo(self, k: int, penalty_weight: float = None) -> Tuple[np.ndarray, float]:
         """
         Convert diversity maximization to QUBO
         
-        Diversity Maximization:
-            maximize: sum_{i<j} (1 - S_ij) * x_i * x_j
-            subject to: sum_i x_i = k
-        
-        Where:
-            x_i ∈ {0,1} = molecule i is selected
-            S_ij = Tanimoto similarity between i and j
-        
-        QUBO Reformulation:
-            minimize: -sum_{i<j} (1 - S_ij) * x_i * x_j + penalty * (sum_i x_i - k)^2
-        
         Args:
             k: Number of molecules to select
+            penalty_weight: If None, calculates dynamically.
             
         Returns:
             Q: QUBO matrix (n x n)
@@ -144,15 +134,25 @@ class QuantumMolecularSelector:
         n = len(self.fingerprints)
         Q = np.zeros((n, n))
         
-        # Objective: maximize diversity = minimize negative diversity
+        # 1. Objective: maximize diversity = minimize negative diversity
+        # Diversidade total varia entre 0 e k*(k-1)/2
         for i in range(n):
             for j in range(i+1, n):
                 distance = 1.0 - self.similarity_matrix[i][j]
                 Q[i][j] = -distance  # Negative because we're minimizing
                 Q[j][i] = -distance
         
-        # Constraint penalty: (sum x_i - k)^2
-        penalty = 10.0  # Tunable parameter
+        # 2. Adaptive Penalty: (sum x_i - k)^2
+        # A penalidade deve ser maior que a contribuição de diversidade de uma única molécula
+        if penalty_weight is None:
+            # Heurística: Penalidade baseada no range da diversidade
+            # Isso garante que satisfazer a restrição é prioritário, mas não dominante
+            penalty = abs(np.sum(Q)) / (n * k) * 2.0
+            if penalty < 0.1: penalty = 1.0 # Fallback
+        else:
+            penalty = penalty_weight
+            
+        print(f"  Using Penalty Weight: {penalty:.4f}")
         
         # Expand: (sum x_i)^2 - 2k * sum x_i + k^2
         # Add to diagonal and off-diagonal
@@ -394,15 +394,16 @@ class QuantumMolecularSelector:
             
             return expectation
         
-        # Initial parameters (random)
-        initial_params = np.random.uniform(0, 2*np.pi, 2*p)
+        # Initial parameters (Heuristic: γ small, β ~ π/4)
+        # instead of fully random to help COBYLA
+        initial_params = np.array([0.01, np.pi/4] * p)
         
         # Optimize
         result = minimize(
             objective_function,
             initial_params,
             method='COBYLA',
-            options={'maxiter': maxiter}
+            options={'maxiter': maxiter, 'rhobeg': 0.1}
         )
         
         print(f"  Optimization converged: {result.success}")
@@ -488,13 +489,14 @@ def main():
     
     # FIRST: Test with simulator (Limit to 15 qubits for local simulation)
     print("\n" + "="*60)
-    print("TESTING WITH SIMULATOR (Sub-amostragem para 15 qubits)")
+    print("TESTING WITH SIMULATOR (Random Sampling - Bug Fix #1)")
     print("="*60)
     
-    df_subset = df.head(15)
+    # Bug Fix #1: Use random sampling instead of head() to avoid bias
+    df_subset = df.sample(n=15, random_state=42)
     selector_sim = QuantumMolecularSelector(df_subset, use_real_quantum=False)
     qaoa_selection_sim, qaoa_diversity_sim, qaoa_time_sim = selector_sim.qaoa_optimize(
-        k=5, # Reduzido proporcionalmente
+        k=5, 
         p=1, 
         shots=1024
     )
