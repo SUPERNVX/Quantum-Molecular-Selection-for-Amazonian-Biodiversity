@@ -134,10 +134,12 @@ python src/classical/genetic_selector.py --population 100 --generations 200
 **Day 29-35: QAOA Implementation**
 ```python
 # Test QAOA with simulator (FREE, unlimited)
-python src/quantum/qaoa_selector.py --backend simulator --p 1
+# Test QAOA with simulator (FREE, unlimited)
+python src/quantum/quantum_molecular_selection.py --backend simulator --p 1
 
-# This is where you spend most time debugging
-# DO NOT touch real quantum hardware yet
+# [NEW] Run Hierarchical Strategy (Recommended for large datasets)
+python src/quantum/hierarchical_selector.py
+# This breaks the problem into smaller chunks feasible for simulation
 ```
 
 **Critical Steps**:
@@ -204,11 +206,13 @@ for optimizer in ['COBYLA', 'NELDER-MEAD', 'POWELL']:
 **Before Running on Real Hardware**:
 ```bash
 # Final verification checklist
-python src/quantum/pre_flight_check.py
+# Prepare for IBM Quantum (select best subset)
+python prepare_for_ibm_quantum.py
 
-# This checks:
-# ✓ Code has no bugs
-# ✓ Circuit compiles
+# This script will:
+# ✓ Create subsets of size 20, 25, 30
+# ✓ Estimate execution time
+# ✓ Recommend the best configuration
 # ✓ Simulator works
 # ✓ IBM account active
 # ✓ Backend selected

@@ -34,10 +34,25 @@ This research investigates the application of quantum computing to optimize mole
 ## 🔬 Methodology
 
 ### Dataset
-- **Source**: PubChem, NuBBE Database (Brazilian Natural Products)
-- **Size**: 300-500 Amazonian plant-derived molecules
-- **Filters**: Drug-like properties (Lipinski's Rule of Five)
+- **Source**: [BrNPDB](https://brnpdb.shinyapps.io/BrNPDB/) (Brazilian Natural Product Database)
+- **Size**: 810 Amazonian plant-derived molecules (Refined from 1,054)
+- **Filters**: Species Location: *Amazonas*, Source: *Natural*
+- **Refinement Strategy**: drug-likeness criteria (MW: 150-600, LogP: -1 to 6)
 - **Representation**: Morgan fingerprints (radius=2, 2048 bits)
+
+![BrNPDB Filters](file:///c:/Users/Nicolas/projeto/Quantum-Molecular-Selection-for-Amazonian-Biodiversity/public/img/filters.webp)
+*Configuração de filtros utilizada para a extração dos dados e posterior refinamento farmacológico.*
+
+#### 🧪 Rationale for Refinement
+Para garantir que a seleção de diversidade fosse aplicada a moléculas com real potencial farmacotecnológico, o banco original de 1.054 moléculas foi refinado para um subconjunto de **810 moléculas**, utilizando os seguintes critérios:
+
+1. **Faixa de Peso Molecular (150 - 600 Da)**:
+   - Removemos **Fragmentos** ( < 150 Da): Moléculas muito pequenas que geralmente não possuem afinidade específica suficiente para alvos terapêuticos.
+   - Removemos **Macromoléculas** ( > 600 Da): Metabólitos secundários muito grandes que costumam apresentar baixa biodisponibilidade e dificuldade de transporte através de membranas celulares.
+2. **Lipofilicidade (LogP entre -1 e 6)**:
+   - Filtramos para garantir que as moléculas selecionadas possuam propriedades físico-químicas compatíveis com boa absorção e distribuição no organismo humano.
+
+O resultado é um dataset mais focado e cientificamente relevante para a descoberta de fármacos na Amazônia.
 
 ### Problem Formulation
 **Objective**: Maximize structural diversity in selected molecular subset
@@ -52,6 +67,8 @@ where: x_i ∈ {0,1} indicates molecule selection
 1. **Classical Greedy**: O(kn) complexity, fast but suboptimal
 2. **Genetic Algorithm**: Evolutionary optimization, better solutions
 3. **QAOA**: Quantum variational algorithm, potential quantum advantage
+4. **Hierarchical QAOA** (Hybrid): Clustering + QAOA to handle large datasets (N > 1000)
+5. **Embedding QAOA** (Alternative): Dimensionality reduction + QAOA
 
 ### QAOA Implementation
 - **Depth**: p = 1-3 layers
@@ -71,15 +88,16 @@ quantum_biodiversity_project/
 │   └── results/                # Experimental results
 ├── src/
 │   ├── classical/              # Classical algorithms
-│   │   ├── greedy_selector.py
+│   │   ├── classical_molecular_selection.py
 │   │   └── genetic_selector.py
 │   ├── quantum/                # Quantum algorithms
-│   │   ├── qaoa_selector.py
-│   │   └── qubo_formulation.py
+│   │   ├── quantum_molecular_selection.py
+│   │   ├── hierarchical_selector.py
+│   │   └── embedding_selector.py
 │   ├── utils/                  # Utilities
-│   │   ├── data_collection.py
 │   │   └── visualization.py
 │   └── analysis/               # Analysis scripts
+├── prepare_for_ibm_quantum.py  # Script to prepare jobs for IBM Quantum
 ├── notebooks/                  # Jupyter notebooks
 ├── figures/                    # Generated plots
 ├── papers/                     # Paper drafts
@@ -119,17 +137,20 @@ cp .env.template .env
 ### Quick Start
 
 ```python
-# Collect dataset
-python src/utils/data_collection.py
+# Note: O dataset foi coletado manualmente do site BrNPDB utilizando os filtros acima.
+# O arquivo brnpdb.csv já está disponível em data/processed/
 
 # Run classical baseline
-python src/classical/greedy_selector.py --k 20
+python src/classical/classical_molecular_selection.py
 
 # Run QAOA (simulator first)
-python src/quantum/qaoa_selector.py --backend simulator --k 20
+python src/quantum/quantum_molecular_selection.py
 
-# Compare results
-python src/analysis/compare_algorithms.py
+# Run Hybrid Hierarchical Strategy (Recommended for large datasets)
+python src/quantum/hierarchical_selector.py
+
+# Prepare for IBM Quantum execution
+python prepare_for_ibm_quantum.py
 ```
 
 ---

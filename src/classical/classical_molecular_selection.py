@@ -8,7 +8,7 @@ Implements greedy and genetic algorithm approaches
 import numpy as np
 import pandas as pd
 from rdkit import Chem
-from rdkit.Chem import AllChem, DataStructs
+from rdkit.Chem import AllChem, DataStructs, rdMolDescriptors, rdFingerprintGenerator
 from typing import List, Set, Tuple
 import time
 
@@ -46,11 +46,14 @@ class MolecularDiversitySelector:
         fingerprints = []
         valid_indices = []
         
+        # Morgan fingerprint, radius=2, 2048 bits
+        # Using new generator API to avoid deprecation warning
+        mfgen = rdFingerprintGenerator.GetMorganGenerator(radius=2, fpSize=2048)
+        
         for idx, row in self.molecules_df.iterrows():
             mol = Chem.MolFromSmiles(row['smiles'])
             if mol:
-                # Morgan fingerprint, radius=2, 2048 bits
-                fp = AllChem.GetMorganFingerprintAsBitVect(mol, radius=2, nBits=2048)
+                fp = mfgen.GetFingerprint(mol)
                 fingerprints.append(fp)
                 valid_indices.append(idx)
         
@@ -106,23 +109,19 @@ class MolecularDiversitySelector:
         
         return diversity
     
-    def greedy_selection(self, k: int = 20) -> Tuple[Set[int], float, float]:
+    def greedy_selection(self, k: int = 20) -> Tuple[List[int], float, float]:
         """
-        Greedy algorithm: Iteratively add molecule that maximizes diversity
-        
-        Algorithm:
-        1. Start with empty selection
-        2. Add most central molecule (highest avg distance to all others)
-        3. Repeat: Add molecule that maximizes diversity increment
-        
-        Time Complexity: O(K * N)
-        
-        Args:
-            k: Number of molecules to select
+        Classic Greedy Selection algorithm.
+        O(k*N) complexity.
+        """
+        # Safety check for k
+        if k > len(self.fingerprints):
+            print(f"  Warning: requested k={k} is larger than dataset size={len(self.fingerprints)}. Selecting all molecules.")
+            k = len(self.fingerprints)
             
-        Returns:
-            (selected_indices, diversity_score, execution_time)
-        """
+        if k <= 0:
+            return [], 0.0, 0.0
+
         print(f"\n{'='*60}")
         print(f"GREEDY SELECTION (k={k})")
         print(f"{'='*60}")
@@ -313,7 +312,7 @@ def main():
     """Example usage"""
     # Load dataset
     print("Loading molecular dataset...")
-    df = pd.read_csv('data/processed/amazonian_molecules.csv')
+    df = pd.read_csv('data/processed/brnpdb.csv')
     print(f"Loaded {len(df)} molecules")
     
     # Initialize selector

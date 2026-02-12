@@ -4,9 +4,26 @@
 
 ---
 
-## PRIMARY DATA SOURCES (Recommended)
+## PRIMARY DATA SOURCE (Used in this Project)
 
-### 1. **PubChem** (FREE, NO API KEY NEEDED)
+### 1. **BrNPDB** (Brazilian Natural Product Database) ⭐⭐⭐
+- **What**: Comprehensive database of molecules from Brazilian biodiversity.
+- **Link**: [BrNPDB Shiny App](https://brnpdb.shinyapps.io/BrNPDB/)
+- **Filters Used**:
+  - **Species Location**: Amazonas
+  - **Source**: Natural
+- **Data Export**: Manual download as CSV from the "Chemical Information" or search results tab.
+- **Current Dataset**: 810 molecules (Refined).
+- **Refinement History**:
+  - **Original Source**: 1,054 molecules filtered for Amazonas/Natural.
+  - **Pharmacological Refinement**: Applied MW (150-600) and LogP (-1 to 6) filters.
+  - **Result**: Removed 244 non-drug-like entries (fragments and large macromolecules).
+
+---
+
+## OTHER DATA SOURCES (Recommended for enrichment)
+
+### 2. **PubChem** (FREE, NO API KEY NEEDED)
 - **What**: 100+ million chemical structures
 - **Amazonian subset**: Search "Amazonian plant" OR specific species
 - **API**: https://pubchemdocs.ncbi.nlm.nih.gov/pug-rest
@@ -26,7 +43,7 @@
       mol_data = requests.get(mol_url).json()
   ```
 
-### 2. **ZINC Database** (FREE)
+### 3. **ZINC Database** (FREE)
 - **What**: Drug-like molecules, 230+ million
 - **Subset**: Natural products
 - **URL**: https://zinc.docking.org/
