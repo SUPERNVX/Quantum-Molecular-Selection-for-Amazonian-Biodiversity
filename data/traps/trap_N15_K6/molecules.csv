@@ -1,0 +1,16 @@
+Unnamed: 0,brnpdb_id,common_name,smiles
+236,1849,"(2S,3S,3aR)-3a-allyl-5-methoxy-3-methyl-2-piperonyl-2,3,3a,6-tetrahydro-6-oxobenzofuran",C=CC[C@]12C(O[C@H]([C@@]3=CC4=C(OCO4)C=C3)[C@H]2C)=CC(C(OC)=C1)=O
+239,1852,"(2R,3S)-7-allyl-6-hydroxy-5-methoxy-3-methyl-2-piperonyl-2,3-dihydrobenzofuran",C=CCC1=C2C([C@H](C)[C@H]([C@]3=CC=C(OCO4)C4=C3)O2)=CC(OC)=C1O
+728,7099,"Naphthalene, 1,2,3,5,6,8a-hexahydro-4,7-dimethyl-1-(1-methylethyl)-, (1S,8aS)-",C1=C(C)CCC2=C(C)CCC(C12)C(C)C
+159,1497,hexadecanoic acid,C(CCCCCCCCCC)CCCCC(=O)O
+597,5984,"1H-Benzocycloheptene, 2,4a,5,6,7,8,9,9a-octahydro-3,5,5-trimethyl-9-methylene-, (4aS,9aR)-",C=C1CCCC(C)(C)C2C=C(C)CCC12
+253,1944,γ-Cadinene,C[C@@H]([C@@H]1[C@]2([H])[C@@](CCC(C)=C2)([H])C(CC1)=C)C
+345,2283,"(2S,3S,3aR,5R)-3a-Allyl-5-methoxy-2-(3,4-methylene-dioxyphenyl)-3-methyl-2,3,3a,4,5,6-hexahydro-6-oxo-benzofuran",C(C=C)[C@]12C(=CC(=O)[C@@H](C2)OC)O[C@@H]([C@H]1C)c1cc2c(cc1)OCO2
+869,8646,"Cyclohexanone, 2-methyl-5-(1-methylethenyl)-, (2R,5R)-",O=C1CC(C(=C)C)CCC1C
+875,8697,"4H-1-Benzopyran-4-one, 2,3-dihydro-5,7-dihydroxy-2-(4-hydroxyphenyl)-, (2S)-",O=C1C=2C(O)=CC(O)=CC2OC(C3=CC=C(O)C=C3)C1
+333,2214,"(3R)-8-Hydroxy-5-methoxy-3-methyl-3,4-dihydroisocoumarin",O(C)c1c2c(C(=O)O[C@@H](C2)C)c(cc1)O
+591,5884,"2-Propenoic acid, 3-(6-methoxy-9H-pyrido[3,4-b]indol-1-yl)-, (2Z)-",O=C(O)C=CC1=NC=CC=2C=3C=C(OC)C=CC3NC12
+1006,9799,"7H-Dibenzo[de,g]quinolin-7-one, 3-hydroxy-1,2,9-trimethoxy-",O=C1C2=NC=CC3=C(O)C(OC)=C(OC)C(C=4C=CC(OC)=CC14)=C23
+246,1928,Longifolene,CC1(C)[C@@H]2[C@@H]3[C@@](C(=C)[C@H]2CC3)(CCC1)C
+725,7070,"Spiro[5.5]undec-2-ene, 3,7,7-trimethyl-11-methylene-, (6R)-",C=C1CCCC(C)(C)C12CC=C(C)CC2
+181,1629,"Rel-(1R,5R)-2-(1-Farnesyl-5-acetoxy-2-oxocyclohex-3-en-1-yl)-acetic acid methyl ester",C(/C=C(/CC/C=C(/CCC=C(C)C)\C)\C)[C@]1(CC(=O)OC)C[C@@H](OC(=O)C)C=CC1=O

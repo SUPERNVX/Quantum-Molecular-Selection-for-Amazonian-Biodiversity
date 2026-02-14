@@ -1,0 +1,63 @@
+{
+  "start_time": "2026-02-12T14:48:06.450509",
+  "n_workers": 11,
+  "ga_generations": 100,
+  "ga_population": 50,
+  "configs": [
+    {
+      "n": 15,
+      "k": 6,
+      "trials": 5000,
+      "traps_found": 0,
+      "best_gap_percent": null,
+      "execution_time_sec": 129.22409391403198,
+      "trials_per_second": 38.69247482072743
+    },
+    {
+      "n": 25,
+      "k": 5,
+      "trials": 3000,
+      "traps_found": 2968,
+      "best_gap_percent": 0.8775993174129342,
+      "execution_time_sec": 76.06670665740967,
+      "trials_per_second": 39.43906778443088
+    },
+    {
+      "n": 30,
+      "k": 5,
+      "trials": 2000,
+      "traps_found": 1724,
+      "best_gap_percent": 0.8721874963101929,
+      "execution_time_sec": 58.095353841781616,
+      "trials_per_second": 34.42616091894115
+    },
+    {
+      "n": 80,
+      "k": 12,
+      "trials": 200,
+      "traps_found": 24,
+      "best_gap_percent": 0.03596799450235926,
+      "execution_time_sec": 11.788754940032959,
+      "trials_per_second": 16.965320003457535
+    },
+    {
+      "n": 100,
+      "k": 11,
+      "trials": 150,
+      "traps_found": 42,
+      "best_gap_percent": 0.10857367840469993,
+      "execution_time_sec": 10.407432079315186,
+      "trials_per_second": 14.412777220821418
+    },
+    {
+      "n": 120,
+      "k": 10,
+      "trials": 100,
+      "traps_found": 90,
+      "best_gap_percent": 0.5219188745476602,
+      "execution_time_sec": 4.962303876876831,
+      "trials_per_second": 20.151929926334518
+    }
+  ],
+  "end_time": "2026-02-12T14:52:57.000587"
+}

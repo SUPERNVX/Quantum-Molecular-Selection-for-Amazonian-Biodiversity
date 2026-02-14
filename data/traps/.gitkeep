@@ -1,0 +1,3 @@
+# Trap Subsets Directory
+# This directory stores molecular subsets where GA > Greedy (traps)
+# Each trap is stored in a subdirectory: trap_N{size}_K{select}/

@@ -1,0 +1,26 @@
+Unnamed: 0,brnpdb_id,common_name,smiles
+340,2226,"2,4,5-trimethoxystyrene",C(=C)c1c(OC)cc(c(c1)OC)OC
+620,6246,"2,6-Heptadien-1-ol, 2-methyl-6-[(1S)-4-methyl-3-cyclohexen-1-yl]-, (2E)-",OCC(=CCCC(=C)C1CC=C(C)CC1)C
+916,9103,"Naphthalene, 1,2,3,4,4a,5,6,8a-octahydro-4a,8-dimethyl-2-(1-methylethylidene)-, (4aR,8aR)-",C1=C(C)C2CC(=C(C)C)CCC2(C)CC1
+69,739,"(E)-3,4-methylenedioxycinnamaldehyde",O=C/C=C/C1=CC(OCO2)=C2C=C1
+554,5507,"4H-Dibenzo[de,g]quinolin-2-ol, 5,6,6a,7-tetrahydro-1-methoxy-",OC=1C=C2C3=C(C1OC)C4=CC=CC=C4CC3NCC2
+667,6610,"2,6-Octadien-1-ol, 3,7-dimethyl-, (2E)-",OCC=C(C)CCC=C(C)C
+820,8016,"2,6-Octadien-1-ol, 3,7-dimethyl-, 1-acetate",O=C(OCC=C(C)CCC=C(C)C)C
+344,2255,"3,5,7-tri-O-methylgalangin",COc1cc(OC)cc(OC(c3ccccc3)=C2OC)c1C2=O
+68,734,O-methyl eugenol,C=CCC1=CC(OC)=C(OC)C=C1
+614,6190,"1,3-Benzodioxole-5-methanol, α-ethyl-, (αS)-",OC(C1=CC=C2OCOC2=C1)CC
+989,9648,"Naphthalene, 1,2,3,4,4a,5-hexahydro-4,7-dimethyl-1-(1-methylethyl)-, (1S,4S,4aR)-",C=1C(=CCC2C1C(CCC2C)C(C)C)C
+175,1573,"(-)-Isootobaphenol; (2R,3S,4S)-4-guaiacyl-2,3-dimethyl-6,7-methylenedioxytetralin",C[C@@H]1[C@H](c2c(C[C@H]1C)cc1c(c2)OCO1)c1cc(OC)c(cc1)O
+559,5590,"Naphthalene, 1,2,3,4,4a,5,6,7-octahydro-4-methyl-7-methylene-1-(1-methylethyl)-, (1R,4S,4aR)-",C=C1C=C2C(CCC(C)C2CC1)C(C)C
+323,2178,Lancifolin A,[C@H](Cc1cc(OC)c(cc1)O)(C)[C@@]1(OC)C(=CC(=O)C(=C1)CC=C)OC
+738,7173,"Bicyclo[7.2.0]undec-3-en-5-ol, 4,11,11-trimethyl-8-methylene-, (1R,3Z,5S,9S)-",OC1C(=CCC2C(C(=C)CC1)CC2(C)C)C
+328,2183,Lancifolin F,[C@H](Cc1cc2c(cc1)OCO2)(C)[C@]1(OC)C(=CC(=O)C(=C1)CC=C)OC
+571,5696,"Bicyclo[7.2.0]undec-4-ene, 4,11,11-trimethyl-8-methylene-",C=C1CCC=C(C)CCC2C1CC2(C)C
+976,9551,"Bicyclo[7.2.0]undecan-5-ol, 10,10-dimethyl-2,6-bis(methylene)-, (1S,5S,9R)-",OC1C(=C)CCC2C(C(=C)CC1)CC2(C)C
+267,2014,tri-O-methylmoschatoline,O=C2C1=CC=CC=C1C3=C(OC)C(OC)=C(OC)C4=CC=NC2=C34
+678,6664,"4H-1-Benzopyran-4-one, 3-(β-D-galactopyranosyloxy)-5,7-dihydroxy-2-(4-hydroxyphenyl)-",O=C1C(OC2OC(CO)C(O)C(O)C2O)=C(OC=3C=C(O)C=C(O)C13)C=4C=CC(O)=CC4
+865,8625,"Tricyclo[4.4.0.02,7]decane, 1-methyl-3-methylene-8-(1-methylethyl)-, (1R,2S,6S,7S,8S)-rel-",C=C1CCC2C3C1C2(C)CCC3C(C)C
+787,7680,"1,2,4-Metheno-1H-indene, octahydro-1,7a-dimethyl-5-(1-methylethyl)-, (1S,2S,3aR,4R,5S,7aS,8R)-",CC(C)C1CCC2(C)C3CC4C(C13)C42C
+551,5496,"Naphthalene, 1,2,3,4,4a,5,6,7-octahydro-4-methyl-7-methylene-1-(1-methylethyl)-, (1S,4S,4aR)-",C=C1C=C2C(CCC(C)C2CC1)C(C)C
+332,2213,"(3R)-S-Carboxy-8-hydroxy-3-methyl-3,4-dihydroisocoumarin",C(=O)(O)c1c2c(C(=O)O[C@@H](C2)C)c(cc1)O
+992,9673,"6H-Dibenzo[a,g]quinolizin-13-ol, 5,8,13,13a-tetrahydro-2,3,9,10-tetramethoxy-, (13R,13aR)-",OC1C2=CC=C(OC)C(OC)=C2CN3CCC4=CC(OC)=C(OC)C=C4C31

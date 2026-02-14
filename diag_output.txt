@@ -1,0 +1,14 @@
+[Hybrid] Inicializando para 25 moleculas...
+[INFO] Computing fingerprints for 25 molecules...
+[LOAD] Loading cached similarity matrix from data/temp_hybrid\sim_matrix_N25_e608524df1ab.npy...
+[Hybrid] GPU solicitada mas falhou no teste de execucao. Usando CPU...
+[Hybrid] Pronto com 25 qubits no backend aer_simulator_statevector (CPU).
+
+--- Diagnostic for trap_N25_K8 ---
+Number of Pauli terms: 325
+Energy of Greedy (metadata): -357.4144
+Energy of Neighbor (k=8):  -357.0177
+Energy of Invalid (k=7):   -335.8821
+
+Gap (Invalid-Greedy): 21.5323
+RESULT: Healthy constraint enforcement.

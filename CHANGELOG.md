@@ -1,121 +1,70 @@
 # Changelog
 
-Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
-
-O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),
-e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
-
-## [Não Lançado]
-
-### Planejado
-- Análise comparativa (Greedy vs GA vs QAOA)
-- Visualizações de diversidade molecular
-- Paper draft (LaTeX)
-- Submissão arXiv
+Todas as mudanças notáveis neste projeto estão documentadas abaixo, organizadas por etapas de desenvolvimento.
 
 ---
 
-## [0.2.0] - 2026-02-09
+## 🏆 Etapa 5: Consolidação e Cleanup (V0.3.0) - 2026-02-13
+**Foco:** Refatoração, remoção de legados e documentação final de alta fidelidade.
+
+### Removido (Cleanup)
+- **Diretórios Legados:** Remoção completa de `src/classical` e `src/quantum` (supersedidos pela pasta `hotstart`).
+- **Scripts de Diagnóstico:** Deletados scripts temporários como `reproduce_lite_freeze.py`, `debug_sim.py`, `test_fp.py`, etc.
+- **Documentação Obsoleta:** Remoção de `DATA_SOURCES.md` e `EXECUTION_GUIDE.md` (informações consolidadas no README).
+
+### Modificado (Refatoração)
+- **Documentação Central:** Atualização massiva do `README.md`, `PROJECT_STATUS.md` e `QUICK_START_PT.md` para refletir a nova arquitetura.
+- **Hotstart README:** Documentação específica para as ferramentas de produção `lite_selector.py` e `hybrid_selector.py`.
+
+---
+
+## 🚀 Etapa 4: Escalabilidade e Vitória Quântica (N=25) - 2026-02-12
+**Foco:** Superação da barreira dos 25 qubits e demonstração de vantagem quântica escalada.
 
 ### Adicionado
-- **Sistema de Coleta Robusta (v5):**
-  - Integração com NCBI Entrez E-Utilities (`pcsubstance`) para busca taxonômica precisa.
-  - Conversão automatizada de SID para CID via PUG REST.
-  - Suporte a múltiplas chaves de estrutura (`SMILES`, `CanonicalSMILES`, `IsomericSMILES`).
-  - Rate limiting conservador para estabilidade da API.
-- **Resultados de Algoritmos:**
-  - Execução bem-sucedida de Greedy e Algoritmo Genético.
-  - Execução de QAOA Quântico com 15 qubits (simulação local).
-  - Geração de artefatos de saída em `data/results/`.
+- **Vitória N=25, K=8:** QAOA Hybrid superou o Greedy e o Algoritmo Genético em um espaço de busca de $2^{25}$ estados.
+- **Refinamento de Alta Fidelidade:** Implementação de $p=2$ camadas com 100 iterações de otimização COBYLA.
+- **Demo de Refinamento:** Criação do script `demo_refinement.py` para demonstração rápida das vitórias científicas.
+
+### Modificado
+- **Otimização de Ansatz:** Introdução de `ParameterVector` para evitar a reconstrução do circuito a cada iteração, reduzindo o overhead.
+- **Estabilidade de Simulação:** Integração total com `AerSimulator` e sistema de fallback automático GPU -> CPU.
+
+---
+
+## 🔬 Etapa 3: Pivot Algorítmico e Arquitetura Hybrid - 2026-02-11
+**Foco:** Transição para o paradigma Hybrid (Warm-Start) e correção do "Hamiltoniano Cego".
+
+### Adicionado
+- **Hybrid Selector:** Integração oficial entre o Warm-Start (Greedy) e o refinamento quântico.
+- **Sparse Hamiltonians:** Substituição de matrizes densas por `SparsePauliOp` para evitar erros de OOM em sistemas grandes.
+- **SCIENTIFIC_CHANGELOG.md:** Criação do diário de bordo científico para registro de hipóteses e provas matemáticas.
 
 ### Corrigido
-- **Migração Qiskit 1.0:**
-  - Substituição do `BackendSampler` (obsoleto) pelo `AerSampler` e `IBMSampler`.
-  - Tratamento de outcomes de medição como inteiros (novo padrão do Qiskit 1.0).
-- **Esquema de Dados:**
-  - Harmonização da coluna `species`/`source` entre coleta e pré-processamento.
-- **Logística de Dados:**
-  - Correção de bug no achatamento (flattening) de listas de CIDs.
+- **Alinhamento Ising-QUBO:** Correção na leitura das Pauli Strings para garantir que a energia quântica seja 100% equivalente à diversidade estrutural.
+- **Little-Endian Logic:** Sincronização da ordem dos bits entre seletores clássicos e quânticos.
 
 ---
 
-## [0.1.0] - 2026-02-09
+## 📊 Etapa 2: Coleta e Baselines (V0.2.0) - 2026-02-09
+**Foco:** Validação do dataset Amazônico e estabelecimento das metas clássicas.
 
 ### Adicionado
-- Setup inicial do projeto
-- Ambiente virtual Python (`quantum_env`)
-- Estrutura de diretórios completa
-- Scripts de setup automatizado:
-  - `setup_environment.ps1` - Setup Windows PowerShell
-  - `QUICK_START_PT.md` - Guia rápido em português
-- Pipeline de extração de dados:
-  - `src/utils/data_collection.py` - Coleta PubChem API
-  - `src/utils/data_preprocessing.py` - Fingerprints e similaridade
-- Scripts de verificação:
-  - `verify_setup.py` - Validação de dependências
-- Algoritmos implementados:
-  - `src/classical/classical_molecular_selection.py` - Greedy + Genetic
-  - `src/quantum/quantum_molecular_selection.py` - QAOA
-- Documentação:
-  - `README.md` - Visão geral do projeto
-  - `DATA_SOURCES.md` - Guia de fontes de dados
-  - `EXECUTION_GUIDE.md` - Plano de 10-12 semanas
-  - `implementation_plan.md` - Plano técnico detalhado
-  - `walkthrough.md` - Guia completo de setup
-
-### Dependências
-- Qiskit 1.0.0 (computação quântica)
-- Qiskit Aer 0.13.3 (simulador)
-- Qiskit IBM Runtime 0.18.0 (acesso a hardware real)
-- RDKit 2023.9.4 (química computacional)
-- NumPy 1.26.3
-- Pandas 2.1.4
-- SciPy 1.11.4
-- Scikit-learn 1.4.0
-- Matplotlib 3.8.2
-- Seaborn 0.13.0
-- Plotly 5.18.0
-- NetworkX 3.2.1
-- TQDM 4.66.1
-- Python-dotenv 1.0.0
-- Requests 2.31.0
-- Jupyter 1.0.0 (opcional)
-
-### Configuração
-- Python 3.9+ requerido (testado com Python 3.14.0)
-- Ambiente virtual isolado
-- IBM Quantum Account configurável (opcional para início)
+- **Sistema de Coleta Robusta (v5):** Integração com NCBI Entrez para busca taxonômica.
+- **Dataset Refinado:** Criação do subconjunto de 810 moléculas com propriedades fármaco-tópicas (Lipinski-like).
+- **Find Greedy Traps:** Desenvolvimento de scripts para localizar instâncias onde a heurística guloza falha.
 
 ---
 
-## Formato de Versionamento
+## 🏗️ Etapa 1: Ambiente e Setup (V0.1.0) - 2026-02-08
+**Foco:** Construção da fundação técnica e infraestrutura.
 
-### [MAJOR.MINOR.PATCH]
-
-**MAJOR**: Mudanças incompatíveis na API  
-**MINOR**: Novas funcionalidades compatíveis  
-**PATCH**: Correções de bugs compatíveis  
-
-### Categorias de Mudanças
-
-- **Adicionado**: Novas funcionalidades
-- **Modificado**: Mudanças em funcionalidades existentes
-- **Descontinuado**: Funcionalidades que serão removidas
-- **Removido**: Funcionalidades removidas
-- **Corrigido**: Correções de bugs
-- **Segurança**: Vulnerabilidades corrigidas
+### Adicionado
+- **Setup Automatizado:** Criação de scripts para Windows PowerShell e Linux.
+- **Filtros RDKit:** Implementação inicial de fingerprints Morgan Radius 2.
+- **Infraestrutura:** Configuração do ambiente virtual e verificação de dependências.
 
 ---
 
-## Links
-
-- [Repositório GitHub](https://github.com/supernvx/quantum-biodiversity)
-- [Issues](https://github.com/supernvx/quantum-biodiversity/issues)
-- [Documentação](README.md)
-- [LACQ Feynman](https://lacq.com.br/)
-- [IBM Quantum](https://quantum.ibm.com/)
-
----
-
-**Data da última atualização**: 2026-02-09  
-**Mantenedor**: Nicolas Mendes de Araújo (@supernvx)
+**Mantenedor:** Nicolas Mendes de Araújo (@supernvx)
+**Última Atualização:** 13 de Fevereiro de 2026
