@@ -11,7 +11,7 @@ from tqdm import tqdm
 from src.hotstart.classical import MolecularDiversitySelector
 from src.hotstart.find_greedy_traps import save_trap, load_existing_best_gap, run_single_trial
 
-def refine_heavyweight_parallel(n=25, k=8, trials=1000, ga_gen=300, n_workers=11):
+def refine_heavyweight_parallel(n=15, k=6, trials=20000, ga_gen=300, n_workers=11):
     print(f"\n{'='*60}")
     print(f"PARALLEL TRAP REFINEMENT: N={n}, K={k}")
     print(f"Trials: {trials} | GA Generations: {ga_gen} | Workers: {n_workers}")
